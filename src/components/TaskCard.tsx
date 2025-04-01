@@ -9,13 +9,13 @@ interface TaskProps {
 
 const TaskCard: React.FC<TaskProps> = ({ task, onDelete, onUpdate }) => {
   return (
-    <Card sx={{ m: 2, p: 2, borderLeft: `5px solid ${task.status === "completada" ? "green" : "orange"}` }}>
+    <Card sx={{ m: 2, p: 2, borderRadius: '20px', borderLeft: `5px solid ${task.status === "done" ? "green" : task.status === "in progress" ? "orange" : "#0288d1"}` }}>
       <CardContent>
         <Typography variant="h6">{task.title}</Typography>
         <Typography color="textSecondary">{task.description}</Typography>
         <Chip
           label={task.status.toUpperCase()}
-          color={task.status === "completada" ? "success" : task.status === "en progreso" ? "warning" : "default"}
+          color={task.status === "done" ? "success" : task.status === "in progress" ? "warning" : "info"}
           sx={{ mt: 1 }}
         />
         <IconButton color="primary" onClick={() => onUpdate(task.id)}>

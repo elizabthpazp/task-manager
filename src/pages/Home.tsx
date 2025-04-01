@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { Button, Container } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import AddTaskDialog from "../components/AddTaskDialog";
 import TaskList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 
-interface Task {
+const TASK_STATUSES = ["to do", "in progress", "done"] as const;
+
+type TaskStatus = (typeof TASK_STATUSES)[number];
+
+type Task = {
   id: string;
   title: string;
   description: string;
-  status: string;
-}
+  status: TaskStatus;
+};
 
 const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,17 +21,45 @@ const Home = () => {
 
   const addTask = (task: Task) => setTasks([...tasks, task]);
   const deleteTask = (id: string) => setTasks(tasks.filter((t) => t.id !== id));
-  const updateTask = (id: string) =>
-    setTasks(tasks.map((t) => (t.id === id ? { ...t, status: "completed" } : t)));
+  const updateTask = (updatedTask: Task) => {
+    if (!["to do", "in progress", "done"].includes(updatedTask.status)) {
+      console.error("Invalid status:", updatedTask.status);
+      return;
+    }
+    setTasks(
+      tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+  };
 
   return (
     <>
       <Navbar />
       <Container sx={{ mt: 4 }}>
-        <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-          + New task
-        </Button>
-        <AddTaskDialog open={open} onClose={() => setOpen(false)} onAdd={addTask} />
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={2}
+        >
+          <Typography variant="h5" sx={{ color: "info.main" }}>
+            To-do list  
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setOpen(true)}
+            sx={{ borderRadius: "20px" }}
+          >
+            + New Task
+          </Button>
+        </Box>
+
+        <AddTaskDialog
+          open={open}
+          onClose={() => setOpen(false)}
+          onSave={addTask}
+        />
         <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} />
       </Container>
     </>

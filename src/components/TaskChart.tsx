@@ -7,20 +7,20 @@ interface Task {
   id: string,
   title: string,
   description: string,
-  status: "por hacer" | "en progreso" | "completada";
+  status: "to do" | "in progress" | "done";
 }
 
 const TaskChart = ({ tasks }: { tasks: Task[] }) => {
   const data = [
-    { name: "Por hacer", value: tasks.filter((t) => t.status === "por hacer").length },
-    { name: "En progreso", value: tasks.filter((t) => t.status === "en progreso").length },
-    { name: "Completada", value: tasks.filter((t) => t.status === "completada").length },
+    { name: "To do", value: tasks.filter((t) => t.status === "to do").length },
+    { name: "In progress", value: tasks.filter((t) => t.status === "in progress").length },
+    { name: "done", value: tasks.filter((t) => t.status === "done").length },
   ];
 
   return (
     <Card sx={{ p: 2, mt: 4 }}>
       <CardContent>
-        <Typography variant="h5" textAlign="center">📊 Estado de las Tareas</Typography>
+        <Typography variant="h5" textAlign="center">📊 Task status</Typography>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie data={data} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" dataKey="value" label>
