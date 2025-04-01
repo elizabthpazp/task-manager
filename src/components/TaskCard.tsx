@@ -1,24 +1,45 @@
 import { Card, CardContent, Typography, Chip, IconButton } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
-
+import { useDispatch } from "react-redux";
+import { deleteTask } from "../redux/taskSlice";
+import { Task } from '../types'
 interface TaskProps {
-  task: { id: string; title: string; description: string; status: string };
+  task: Task;
   onDelete: (id: string) => void;
-  onUpdate: (id: string) => void;
+  onUpdate: (task: Task) => void;
 }
 
 const TaskCard: React.FC<TaskProps> = ({ task, onDelete, onUpdate }) => {
   return (
-    <Card sx={{ m: 2, p: 2, borderRadius: '20px', borderLeft: `5px solid ${task.status === "done" ? "green" : task.status === "in progress" ? "orange" : "#0288d1"}` }}>
+    <Card
+      sx={{
+        m: 2,
+        p: 2,
+        borderRadius: "20px",
+        borderLeft: `5px solid ${
+          task.status === "done"
+            ? "green"
+            : task.status === "in progress"
+            ? "orange"
+            : "#0288d1"
+        }`,
+      }}
+    >
       <CardContent>
         <Typography variant="h6">{task.title}</Typography>
         <Typography color="textSecondary">{task.description}</Typography>
         <Chip
           label={task.status.toUpperCase()}
-          color={task.status === "done" ? "success" : task.status === "in progress" ? "warning" : "info"}
+          color={
+            task.status === "done"
+              ? "success"
+              : task.status === "in progress"
+              ? "warning"
+              : "info"
+          }
           sx={{ mt: 1 }}
         />
-        <IconButton color="primary" onClick={() => onUpdate(task.id)}>
+        <IconButton color="primary" onClick={() => onUpdate(task)}>
           <Edit />
         </IconButton>
         <IconButton color="error" onClick={() => onDelete(task.id)}>

@@ -1,23 +1,17 @@
-import { Container, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import { Container, Typography, Grid } from "@mui/material";
 import TaskCard from "./TaskCard";
 import AddTaskDialog from "./AddTaskDialog";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { deleteTask, updateTask } from "../redux/taskSlice";
+import { Task } from '../types'
 
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  status: "to do" | "in progress" | "done";
-}
+const TaskList: React.FC = () => {
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
-interface TaskListProps {
-  tasks: Task[];
-  onDelete: (id: string) => void;
-  onUpdate: (task: Task) => void;
-}
+  const dispatch = useDispatch();
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -26,19 +20,21 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
     setModalOpen(true);
   };
 
+  const handleDelete = (id: string) => {
+    dispatch(deleteTask(id));
+  };
+
   const handleSave = (updatedTask: Task) => {
-    onUpdate(updatedTask);
+    dispatch(updateTask(updatedTask));
     setModalOpen(false);
   };
 
   return (
-    <>  
-      {tasks?.length == 0 ? (
+    <>
+      {tasks.length === 0 && (
         <Typography variant="h6" gutterBottom>
           There are no tasks yet
         </Typography>
-      ) : (
-        ""
       )}
 
       <Grid container spacing={2}>
@@ -53,16 +49,17 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onUpdate }) => {
           >
             <TaskCard
               task={task}
-              onDelete={onDelete}
+              onDelete={() => handleDelete(task.id)}
               onUpdate={() => handleEdit(task)}
             />
           </Grid>
         ))}
       </Grid>
+
       <AddTaskDialog
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSave={handleSave}
+        onSave={(updatedTask) => handleSave(updatedTask)}
         taskToEdit={selectedTask}
       />
     </>

@@ -8,13 +8,9 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-
-interface Task {
-  id: string;
-  title: string;
-  description: string;
-  status: "to do" | "in progress" | "done";
-}
+import { useDispatch } from "react-redux";
+import { addTask, updateTask } from "../redux/taskSlice"; // Importa las acciones
+import { Task } from '../types'
 
 interface AddTaskDialogProps {
   open: boolean;
@@ -26,9 +22,9 @@ interface AddTaskDialogProps {
 const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
   open,
   onClose,
-  onSave,
   taskToEdit,
 }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"to do" | "in progress" | "done">(
@@ -48,18 +44,25 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
   }, [taskToEdit]);
 
   const handleSave = () => {
-    if (title.trim()) {
-      onSave({
-        id: taskToEdit?.id || Date.now().toString(),
-        title,
-        description,
-        status,
-      });
-      setTitle("");
-      setDescription("");
-      setStatus("to do");
-      onClose();
+    if (!title.trim()) return; // Evita agregar tareas vacías
+
+    const newTask: Task = {
+      id: taskToEdit?.id || Date.now().toString(),
+      title,
+      description,
+      status,
+    };
+
+    if (taskToEdit) {
+      dispatch(updateTask(newTask)); // Si está editando, despacha updateTask
+    } else {
+      dispatch(addTask(newTask)); // Si es nueva, despacha addTask
     }
+
+    setTitle("");
+    setDescription("");
+    setStatus("to do");
+    onClose();
   };
 
   return (
@@ -77,9 +80,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           fullWidth
           sx={{
             mt: 2,
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "15px",
-            },
+            "& .MuiOutlinedInput-root": { borderRadius: "15px" },
           }}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -90,9 +91,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           multiline
           sx={{
             mt: 2,
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "15px",
-            },
+            "& .MuiOutlinedInput-root": { borderRadius: "15px" },
           }}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -103,9 +102,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           fullWidth
           sx={{
             mt: 2,
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "15px",
-            },
+            "& .MuiOutlinedInput-root": { borderRadius: "15px" },
           }}
           value={status}
           onChange={(e) =>
@@ -113,11 +110,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           }
           SelectProps={{
             MenuProps: {
-              PaperProps: {
-                sx: {
-                  borderRadius: "15px",
-                },
-              },
+              PaperProps: { sx: { borderRadius: "15px" } },
             },
           }}
         >
