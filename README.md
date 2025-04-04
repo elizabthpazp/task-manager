@@ -90,4 +90,4 @@ Elizabeth de la Paz
 
 Frontend Developer | Passionate about code and productivity 🚀
 
-💜 @elizabthpazp
+💜 [elizabthpazp](https://github.com/elizabthpazp)
