@@ -5,8 +5,7 @@ It allows you to create, edit, delete, and organize tasks efficiently. Perfect f
 
 ## 🚀 Live Demo
 
-🔗 [View Live App](https://dev.d2c5zqiv6i5agj.amplifyapp.com/)
-*(Replace with your actual Amplify link)*
+🔗 [View Live App](https://dev.d2c5zqiv6i5agj.amplifyapp.com/) 
 
 ## 🛠️ Tech Stack
 
@@ -86,6 +85,9 @@ frontend:
 ```
 
 ## 👩🏻‍💻 Author
+
 Elizabeth de la Paz
+
 Frontend Developer | Passionate about code and productivity 🚀
+
 💜 @elizabthpazp
