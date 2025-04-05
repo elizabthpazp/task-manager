@@ -6,14 +6,19 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/taskSlice";
 import { Task } from '../types'
+import { AppDispatch } from "../redux/store";
 
 const Home = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [open, setOpen] = useState(false);
-
-  const handleAddTask = (task: Task) => {
-    dispatch(addTask(task));
-    setOpen(false);
+ 
+  const handleAddTask = async (task: Task) => {
+    try { 
+      await dispatch(addTask(task)); 
+      setOpen(false);   
+    } catch (error) {
+      console.error('Error add task:', error);
+    }
   };
 
   return (

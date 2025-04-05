@@ -1,14 +1,8 @@
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Card, CardContent, Typography } from "@mui/material";
+import { Task } from "../types";
 
 const COLORS = ["#FFBB28", "#0088FE", "#00C49F"];
-
-interface Task {
-  id: string,
-  title: string,
-  description: string,
-  status: "to do" | "in progress" | "done";
-}
 
 const TaskChart = ({ tasks }: { tasks: Task[] }) => {
   const data = [

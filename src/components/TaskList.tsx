@@ -1,16 +1,15 @@
 import { Container, Typography, Grid } from "@mui/material";
 import TaskCard from "./TaskCard";
 import AddTaskDialog from "./AddTaskDialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { deleteTask, updateTask } from "../redux/taskSlice";
+import { AppDispatch, RootState } from "../redux/store";
+import { deleteTask, fetchTasks, updateTask } from "../redux/taskSlice";
 import { Task } from '../types'
 
-const TaskList: React.FC = () => {
+const TaskList: React.FC = () => { 
+  const dispatch = useDispatch<AppDispatch>();
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
-
-  const dispatch = useDispatch();
 
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,14 +19,18 @@ const TaskList: React.FC = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteTask(id));
+  const handleDelete = (task: Task) => {
+    dispatch(deleteTask(task));
   };
 
   const handleSave = (updatedTask: Task) => {
     dispatch(updateTask(updatedTask));
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(fetchTasks()); 
+  }, [dispatch]);
 
   return (
     <>
@@ -49,7 +52,7 @@ const TaskList: React.FC = () => {
           >
             <TaskCard
               task={task}
-              onDelete={() => handleDelete(task.id)}
+              onDelete={() => handleDelete(task)}
               onUpdate={() => handleEdit(task)}
             />
           </Grid>

@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addTask, updateTask } from "../redux/taskSlice"; // Importa las acciones
+import { addTask, updateTask } from "../redux/taskSlice";  
 import { Task } from '../types'
+import { AppDispatch } from "../redux/store";
 
 interface AddTaskDialogProps {
   open: boolean;
@@ -24,7 +25,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
   onClose,
   taskToEdit,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"to do" | "in progress" | "done">(
@@ -44,7 +45,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
   }, [taskToEdit]);
 
   const handleSave = () => {
-    if (!title.trim()) return; // Evita agregar tareas vacías
+    if (!title.trim()) return;  
 
     const newTask: Task = {
       id: taskToEdit?.id || Date.now().toString(),
@@ -54,9 +55,9 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
     };
 
     if (taskToEdit) {
-      dispatch(updateTask(newTask)); // Si está editando, despacha updateTask
+      dispatch(updateTask(newTask)); 
     } else {
-      dispatch(addTask(newTask)); // Si es nueva, despacha addTask
+      dispatch(addTask(newTask)); 
     }
 
     setTitle("");
