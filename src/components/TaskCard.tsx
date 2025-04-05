@@ -1,7 +1,5 @@
 import { Card, CardContent, Typography, Chip, IconButton } from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
-import { deleteTask } from "../redux/taskSlice";
+import { Delete, Edit } from "@mui/icons-material"; 
 import { Task } from '../types'
 interface TaskProps {
   task: Task;
