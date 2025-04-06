@@ -1,21 +1,21 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-taskmanager-dev-e5ae4-authRole",
-      "UnauthRoleArn": "arn:aws:iam::638258043508:role/amplify-taskmanager-dev-e5ae4-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::638258043508:role/amplify-taskmanager-dev-e5ae4-authRole",
+      "AuthRoleName": "amplify-taskmanager-dev-b00af-authRole",
+      "UnauthRoleArn": "arn:aws:iam::638258043508:role/amplify-taskmanager-dev-b00af-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::638258043508:role/amplify-taskmanager-dev-b00af-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-taskmanager-dev-e5ae4-deployment",
-      "UnauthRoleName": "amplify-taskmanager-dev-e5ae4-unauthRole",
-      "StackName": "amplify-taskmanager-dev-e5ae4",
-      "StackId": "arn:aws:cloudformation:us-east-2:638258043508:stack/amplify-taskmanager-dev-e5ae4/763d10d0-0f4c-11f0-a7eb-067fb2f6abbb",
-      "AmplifyAppId": "d2c5zqiv6i5agj"
+      "DeploymentBucketName": "amplify-taskmanager-dev-b00af-deployment",
+      "UnauthRoleName": "amplify-taskmanager-dev-b00af-unauthRole",
+      "StackName": "amplify-taskmanager-dev-b00af",
+      "StackId": "arn:aws:cloudformation:us-east-2:638258043508:stack/amplify-taskmanager-dev-b00af/79a07c80-1280-11f0-bac1-06c397f6f11b",
+      "AmplifyAppId": "dufihxt5nilv7"
     },
     "categories": {
       "hosting": {
         "amplifyhosting": {
-          "appId": "d2c5zqiv6i5agj",
-          "type": "manual"
+          "appId": "dufihxt5nilv7",
+          "type": "cicd"
         }
       }
     }
