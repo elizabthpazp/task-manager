@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "pnpm start",
+    "dev": "npm start",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
