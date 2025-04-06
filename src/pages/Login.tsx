@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
      
     if (!email || !password) {
-      setError("Por favor, ingresa un correo electrónico y una contraseña.");
+      setError("Please, insert both email and password.");
       return;
     }
 
@@ -33,7 +33,7 @@ const Login = () => {
 
     } catch (error) {
       console.error("Error en el login:", error);
-      setError("Credenciales inválidas.");
+      setError("Invalid credentials.");
     } finally {
       setLoading(false);   
     }
@@ -48,7 +48,7 @@ const Login = () => {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="Correo electrónico"
+            label="Email"
             variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +62,7 @@ const Login = () => {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="Contraseña"
+            label="Password"
             variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -82,7 +82,7 @@ const Login = () => {
             fullWidth
             disabled={loading} sx={{ height: "50px", borderRadius: "15px" }}
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Iniciar sesión"}
+            {loading ? <CircularProgress size={24} color="inherit" /> : "LogIn"}
           </Button>
         </Box>
       </form>

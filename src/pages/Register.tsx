@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError("Por favor, ingresa un correo electrónico y una contraseña.");
+      setError("Please, insert both email and password.");
       return;
     }
 
@@ -33,8 +33,8 @@ const Register = () => {
        
       navigate("/");
     } catch (error) {
-      console.error("Error al registrar:", error);
-      setError("Hubo un problema al registrar el usuario.");
+      console.error("Error register:", error);
+      setError("There is an error with the registration. Please try again."); 
     } finally {
       setLoading(false);
     }
