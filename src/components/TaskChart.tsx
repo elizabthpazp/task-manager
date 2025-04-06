@@ -14,10 +14,10 @@ const TaskChart = ({ tasks }: { tasks: Task[] }) => {
   return (
     <Card sx={{ p: 2, mt: 4 }}>
       <CardContent>
-        <Typography variant="h5" textAlign="center">📊 Task status</Typography>
+        <Typography variant="h6" textAlign="center" fontFamily="sans-serif">Task status</Typography>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
-            <Pie data={data} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" dataKey="value" label>
+            <Pie data={data} cx="50%" cy="50%" fontFamily="sans-serif" outerRadius={100} fill="#8884d8" dataKey="value" label>
               {data.map((entry, index) => (
                 <Cell key={index} fill={COLORS[index]} />
               ))}

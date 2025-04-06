@@ -27,7 +27,7 @@ const TaskCard: React.FC<TaskProps> = ({ task, onDelete, onUpdate }) => {
         <Typography variant="h6">{task.title}</Typography>
         <Typography color="textSecondary">{task.description}</Typography>
         <Chip
-          label={task.status.toUpperCase()}
+          label={task?.status?.toUpperCase()}
           color={
             task.status === "done"
               ? "success"

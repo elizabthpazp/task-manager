@@ -62,15 +62,14 @@ const taskSlice = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Error get';
-      })
-      // Agregar tarea
+      }) 
       .addCase(addTask.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(addTask.fulfilled, (state, action: PayloadAction<Task>) => {
         state.status = 'succeeded';
         state.tasks.push(action.payload);
-      })
+      })      
       .addCase(addTask.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Error add';

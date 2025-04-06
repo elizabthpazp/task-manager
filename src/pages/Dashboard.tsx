@@ -11,7 +11,7 @@ const Dashboard = () => {
     <>
       <Navbar />
       <Container sx={{ mt: 4 }}>
-        <Typography variant="h4" textAlign="center">📊 Task Dashboard</Typography>
+        <Typography variant="h5" sx={{ color: "info.main" }} fontFamily="sans-serif" textAlign="center">📊 Task Dashboard</Typography>
         <TaskChart tasks={tasks} />
       </Container>
     </>
