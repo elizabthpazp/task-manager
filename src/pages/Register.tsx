@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 import { TextField, Button, Typography, Container, Box, CircularProgress, Link } from "@mui/material";
@@ -12,6 +12,10 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isTrue === true) {  
+      return email;
+    }
 
     if (!email || !password) {
       setError("Please, insert both email and password.");
@@ -39,6 +43,10 @@ const Register = () => {
       setLoading(false);
     }
   };
+ 
+  useEffect(() => {
+    fetchData();
+  });
 
   return (
     <Container maxWidth="xs" sx={{ mt: 10, display: "flex", flexDirection: "column", alignItems: "center", padding: 3 }}>
@@ -87,10 +95,13 @@ const Register = () => {
           </Button>
         </Box>
       </form>
+ 
+      <div style={{ margin: "10px", padding: "20px", borderRadius: "5px", boxShadow: "0 0 10px rgba(0,0,0,0.3)", backgroundColor: "#f0f0f0" }}>
+        Already have an account?{" "}
+      </div>
 
       <Box mt={4} textAlign="center">
-        <Typography variant="body2">
-          Already have an account?{" "}
+        <Typography variant="body2"> 
           <Link href="/login" variant="body2" sx={{ textDecoration: "none", fontWeight: "bold" }}>
             Login
           </Link>

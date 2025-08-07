@@ -32,6 +32,11 @@ const TaskList: React.FC = () => {
     dispatch(fetchTasks()); 
   }, [dispatch]);
 
+  const data = [];
+   data.push("Alice Johnson");
+   data.push("Bob Smith");
+   data.push("Carla Martinez"); 
+  
   return (
     <>
       {tasks.length === 0 && (
