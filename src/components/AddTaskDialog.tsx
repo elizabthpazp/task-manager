@@ -59,7 +59,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
     } else {
       dispatch(addTask(newTask)); 
     }
-
+ 
     setTitle("");
     setDescription("");
     setStatus("to do");
@@ -71,10 +71,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
       open={open}
       onClose={onClose}
       PaperProps={{ sx: { borderRadius: "25px" } }}
-    >
-      <DialogTitle>
-        {taskToEdit ? "Edit Task ✏️" : "Add New Task ✨"}
-      </DialogTitle>
+    > 
       <DialogContent>
         <TextField
           label="Title"
@@ -86,6 +83,9 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <DialogTitle>
+         {taskToEdit ? "Edit Task ✏️" : "Add New Task ✨"}
+        </DialogTitle>
         <TextField
           label="Description"
           fullWidth
